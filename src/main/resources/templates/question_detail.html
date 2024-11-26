@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout}">
+    <div layout:fragment="content" class="flex w-full flex-col border-opacity-50">
+        <!-- 질문 -->
+        <div class="card bg-base-300 rounded-box grid h-20 p-4">
+            <h1 th:text="${question.title}" class="text-lg font-bold"></h1>
+            <div th:text="${question.content}"></div>
+        </div>
+
+        <!-- 답변 작성 -->
+        <div class="divider">답변</div>
+        <div class="card bg-base-300 rounded-box grid h-20 p-4">
+            <h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+            <div>
+                <ul>
+                    <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 답변 버튼 -->
+        <form th:action="@{|/answer/create/${question.id}|}" method="post" th:object="${answerForm}">
+<!--            <div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
+            <textarea th:field="*{content}" name="content" id="content" class="textarea textarea-bordered" placeholder="답변 입력란"></textarea>
+            <input type="submit" value="답변등록">
+        </form>
+
+    </div>
+</html>

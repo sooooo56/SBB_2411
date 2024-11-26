@@ -1,14 +1,30 @@
-<table>
-    <thead>
-    <tr>
-        <th>제목</th>
-        <th>작성일시</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="question : ${questionList}">
-        <td th:text="${question.title}"></td>
-        <td th:text="${question.createDate}" ></td>
-    </tr>
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="ko" layout:decorate="~{layout}">
+    <div layout:fragment="content" class="overflow-x-auto">
+        <table class="table">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th></th>
+                <th>제목</th>
+                <th>조회수</th>
+                <th>작성일시</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <!-- 질문 리스트 -->
+            <tr th:each="question : ${questionList}">
+                <th th:text="${question.id}"></th>
+                <td>
+                    <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.title}"></a>
+                </td>
+                <td>0</td>
+                <td th:text="${question.createDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a th:href="@{/question/create}">질문 등록</a>
+</html>
