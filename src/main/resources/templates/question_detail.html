@@ -20,7 +20,7 @@
 
         <!-- 답변 버튼 -->
         <form th:action="@{|/answer/create/${question.id}|}" method="post" th:object="${answerForm}">
-<!--            <div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
+            <div th:replace="~{form_errors :: formErrorsFragment}"></div>
             <textarea th:field="*{content}" name="content" id="content" class="textarea textarea-bordered" placeholder="답변 입력란"></textarea>
             <input type="submit" value="답변등록">
         </form>

@@ -3,7 +3,7 @@
   <div layout:fragment="content" class="flex w-full flex-col">
     <div class="divider divider-start text-lg font-bold">질문 등록</div>
     <form th:action="@{/question/create}" th:object="${questionForm}" method="post">
-<!--      <div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
+      <div th:replace="~{form_errors :: formErrorsFragment}"></div>
 
       <div>제목</div>
       <input type="text" name="title" id="title" th:field="*{title}">
