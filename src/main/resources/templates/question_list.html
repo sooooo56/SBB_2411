@@ -7,25 +7,53 @@
             <tr>
                 <th></th>
                 <th>제목</th>
-                <th>조회수</th>
                 <th>작성일시</th>
+                <th>조회수</th>
+                <th>댓글수</th>
             </tr>
             </thead>
 
             <tbody>
             <!-- 질문 리스트 -->
-            <tr th:each="question : ${questionList}">
-                <th th:text="${question.id}"></th>
+            <tr th:each="question, loop : ${paging}">
+                <th th:text="${paging.getTotalElements - (paging.number*paging.size) - loop.index}"></th>
                 <td>
                     <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.title}"></a>
                 </td>
-                <td>0</td>
                 <td th:text="${question.createDate}"></td>
+                <td>0</td>
+                <td th:if="${#lists.size(question.answerList) > 0}"
+                    th:text="${#lists.size(question.answerList)}">
+                </td>
             </tr>
             </tbody>
         </table>
 
+        <!--페이징처리 시작-->
+        <div th:if="${!paging.isEmpty()}" class="join">
+            <div th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                <a class="join-item btn" th:href="@{|?page=${paging.number-1}|}">
+                    «
+                </a>
+            </div>
+
+            <div  th:classappend="${page == paging.number} ? 'active'"
+                 th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}">
+                <a class="join-item btn" th:href="@{|?page=${page}|}" th:text="${page}"></a>
+            </div>
+
+            <div th:classappend="${!paging.hasNext} ? 'disabled'">
+                <a class="join-item btn"  th:href="@{|?page=${paging.number+1}|}">
+                    »
+                </a>
+            </div>
+        </div>
+        <!-- 페이징 처리 끝 -->
+
     <a th:href="@{/question/create}">질문 등록</a>
+    
+
 
     </div>
 </html>
