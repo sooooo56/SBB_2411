@@ -1,5 +1,6 @@
 package com.example.sbb.question;
 
+import com.example.sbb.Member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,11 +38,12 @@ public class QuestionService {
     }
 
     // 질문 등록
-    public void create(String content, String title){
+    public void create(String content, String title, Member author){
         Question question = Question.builder()
                 .title(title)
                 .content(content)
                 .createDate(LocalDateTime.now())
+                .author(author)
                 .build();
         this.questionRepository.save(question);
     }

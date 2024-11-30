@@ -1,16 +1,15 @@
-package com.example.sbb.member;
+package com.example.sbb.Member;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Member {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,5 +21,4 @@ public class Member {
 
     @Column(unique = true)
     private String email;
-
 }

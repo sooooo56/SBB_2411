@@ -15,7 +15,7 @@
                 <th></th>
                 <th>제목</th>
                 <th>작성일시</th>
-                <th>조회수</th>
+                <th>작성자</th>
                 <th>댓글수</th>
             </tr>
             </thead>
@@ -28,7 +28,7 @@
                     <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.title}"></a>
                 </td>
                 <td th:text="${question.createDate}"></td>
-                <td>0</td>
+                <td th:if="${question.author != null}" th:text="${question.author.username}"></td>
                 <td th:if="${#lists.size(question.answerList) > 0}"
                     th:text="${#lists.size(question.answerList)}">
                 </td>

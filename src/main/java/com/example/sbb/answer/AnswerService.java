@@ -1,5 +1,6 @@
 package com.example.sbb.answer;
 
+import com.example.sbb.Member.Member;
 import com.example.sbb.question.Question;
 import com.example.sbb.question.QuestionService;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +22,12 @@ public class AnswerService {
     }
 
     // 답변 등록
-    public void create(Question question, String content){
+    public void create(Question question, String content, Member author){
         Answer answer = Answer.builder()
                 .content(content)
                 .createDate(LocalDateTime.now())
                 .question(question)
+                .author(author)
                 .build();
         this.answerRepository.save(answer);
     }
