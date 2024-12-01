@@ -36,31 +36,29 @@
             </tbody>
         </table>
 
-        <!--페이징처리 시작-->
-        <div th:if="${!paging.isEmpty()}" class="join" >
-            <div th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                <a class="join-item btn" th:href="@{|?page=${paging.number-1}|}"
-                   >
-                    «
-                </a>
-            </div>
+    <a th:href="@{/question/create}" class="btn">질문 등록</a>
 
-            <div  th:classappend="${page == paging.number} ? 'active'"
-                 th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}">
-                <a class="join-item btn" th:href="@{|?page=${page}|}" th:text="${page}"></a>
-            </div>
-
-            <div th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a class="join-item btn"  th:href="@{|?page=${paging.number+1}|}"
-                   >
-                    »
-                </a>
-            </div>
+    <!--페이징처리 시작-->
+    <div th:if="${!paging.isEmpty()}" class="join flex justify-center" >
+        <div th:classappend="${!paging.hasPrevious} ? 'disabled'">
+            <a class="join-item btn" th:href="@{|?page=${paging.number-1}|}">
+                «
+            </a>
         </div>
-        <!-- 페이징 처리 끝 -->
 
-    <a th:href="@{/question/create}">질문 등록</a>
+        <div  th:classappend="${page == paging.number} ? 'active'"
+              th:if="${page >= paging.number-5 and page <= paging.number+5}"
+              th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}">
+            <a class="join-item btn" th:href="@{|?page=${page}|}" th:text="${page}"></a>
+        </div>
+
+        <div th:classappend="${!paging.hasNext} ? 'disabled'">
+            <a class="join-item btn"  th:href="@{|?page=${paging.number+1}|}">
+                »
+            </a>
+        </div>
+    </div>
+    <!-- 페이징 처리 끝 -->
     
 
 

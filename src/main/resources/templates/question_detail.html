@@ -2,9 +2,21 @@
 <html lang="ko" layout:decorate="~{layout}">
 <div layout:fragment="content" class="flex w-full flex-col border-opacity-50">
     <!-- 질문 -->
-    <div class="card bg-base-300 rounded-box grid h-20 p-4">
-        <h1 th:text="${question.title}" class="text-lg font-bold"></h1>
-        <div th:text="${question.content}"></div>
+    <div class="card bg-base-300 rounded-box grid h-40 p-4">
+        <div>
+            <h1 th:text="${question.title}" class="text-lg font-bold"></h1>
+            <div th:text="${question.content}"></div>
+        </div>
+        <div>
+            <div th:text="${question.author.username}"></div>
+        </div>
+    </div>
+
+    <div>
+        <a th:href="@{|/question/modify/${question.id}|}" sec:authorize="isAuthenticated()"
+           class="btn" th:text="수정"
+           th:if="${question.author != null
+           and #authentication.getPrincipal().getUsername() == question.author.username}">수정</a>
     </div>
 
     <!-- 답변 작성 -->
@@ -26,9 +38,9 @@
     <form th:action="@{|/answer/create/${question.id}|}" method="post" th:object="${answerForm}">
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <textarea sec:authorize="isAuthenticated()" th:field="*{content}"
-                  name="content" id="content" class="textarea textarea-bordered"
+                  name="content" id="content" class="textarea textarea-bordered container"
                   placeholder="답변 입력란"></textarea>
-        <input type="submit" value="답변등록">
+        <input type="submit" value="답변등록" class="btn">
     </form>
 
 </div>

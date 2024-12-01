@@ -33,4 +33,6 @@ public class Question {
 
     @ManyToOne
     private Member author;
+
+    private LocalDateTime modifyDate;
 }
